@@ -54,7 +54,7 @@ function jsPopunder(sUrl, sConfig) {
 
         var sOptions = 'toolbar=no,scrollbars=yes,location=yes,statusbar=yes,menubar=no,resizable=1,width=' + sWidth.toString() + ',height=' + sHeight.toString() + ',screenX=' + sPosX + ',screenY=' + sPosY;
 
-        document.addEventListener("click", function() {
+        var listenerEvent = function() {
             if (isCapped()) return;
 
             popunder = _parent.window.open(sUrl, sName, sOptions);
@@ -67,7 +67,14 @@ function jsPopunder(sUrl, sConfig) {
                 document.cookie = cookie + 'Cap=' + (popsToday + 1) + ';expires=' + tomorrow.toGMTString() + ';path=/';
                 pop2under();
             }
-        }, false);
+        };
+
+        // trigger on document.click
+        if (document.addEventListener) {
+            document.addEventListener("click", listenerEvent, false);
+        } else {
+            document.attachEvent("onclick", listenerEvent);
+        }
     }
 
 
