@@ -88,9 +88,12 @@ function jsPopunder(sUrl, sConfig) {
             if (browser.firefox) openCloseWindow();
             if (browser.webkit) openCloseTab();
             if (browser.msie) {
-                popunder.opener.window.focus();
-                window.self.window.focus();
-                window.focus();
+                setTimeout(function() {
+                    popunder.blur();
+                    popunder.opener.window.focus();
+                    window.self.window.focus();
+                    window.focus();
+                }, 1000);
             }
         } catch (e) {}
     }
@@ -102,12 +105,13 @@ function jsPopunder(sUrl, sConfig) {
     }
 
     function openCloseTab() {
+        var nothing = '';
         var ghost = document.createElement("a");
-        ghost.href   = "data:text/html,<scr"+"ipt>window.close();</scr"+"ipt>";
+        ghost.href   = "data:text/html,<scr"+nothing+"ipt>window.close();</scr"+nothing+"ipt>";
         document.getElementsByTagName("body")[0].appendChild(ghost);
 
         var clk = document.createEvent("MouseEvents");
-        clk.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, true, false, false, true, 0, null);
+        clk.initMouseEvent("click", false, true, window, 0, 0, 0, 0, 0, true, false, false, true, 0, null);
         ghost.dispatchEvent(clk);
 
         ghost.parentNode.removeChild(ghost);
