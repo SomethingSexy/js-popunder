@@ -1,6 +1,5 @@
 # js-popunder
 
-~~~~~
 **Project development discontinued!**
 
 2013-11-18: I've grown tired of playing a mouse-and-cat game with Google in order to make the pop-under work. Hence, I regret to announce that after over a year of maintaining this project, I've decided to abandon it.
@@ -9,7 +8,7 @@ Thanks for anyone who contributed to this repo with either code or advice. Feel 
 
 Cheers!
 
-~~~~~
+-----
 
 **js-popunder** is a pure javascript function for creating pop-under windows
 
